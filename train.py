@@ -24,6 +24,7 @@ model = RandomForestRegressor(
     random_state=42
 )
 
+model.fit(X_train, y_train)
 
 # Evaluation
 y_pred = model.predict(X_test)
