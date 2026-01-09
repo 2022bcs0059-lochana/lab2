@@ -8,10 +8,10 @@ from sklearn.linear_model import Ridge
 from sklearn.metrics import mean_squared_error, r2_score
 
 # Load dataset
-data = pd.read_csv("data/winequality-red.csv", sep=";")
+df = pd.read_csv("data/winequality-red.csv", sep=";")
 
-X = data.drop("quality", axis=1)
-y = data["quality"]
+X = df.drop("quality", axis=1)
+y = df["quality"]
 
 # Feature selection using correlation
 corr = df.corr()["quality"].abs()
