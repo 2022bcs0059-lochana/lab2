@@ -1,0 +1,41 @@
+name: Lab 2 ML Pipeline
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  train:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+
+    - name: Install dependencies
+      run: pip install -r requirements.txt
+
+    - name: Run training
+      run: python train.py
+
+    - name: Job Summary
+      run: |
+        echo "## Lab 2 – Automated ML Experiment" >> $GITHUB_STEP_SUMMARY
+        echo "**Name:** Lochana Balivada" >> $GITHUB_STEP_SUMMARY
+        echo "**Roll No:** 2022BCS0059" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "### Evaluation Metrics" >> $GITHUB_STEP_SUMMARY
+        cat outputs/results/metrics.json >> $GITHUB_STEP_SUMMARY
+
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: lab2-artifacts
+        path: outputs/
