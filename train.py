@@ -1,3 +1,4 @@
+import os
 import json
 import joblib
 import pandas as pd
@@ -33,6 +34,10 @@ r2 = r2_score(y_test, y_pred)
 # Print metrics (IMPORTANT)
 print(f"MSE: {mse}")
 print(f"R2 Score: {r2}")
+
+# Create output directories if they don't exist
+os.makedirs("outputs/model", exist_ok=True)
+os.makedirs("outputs/results", exist_ok=True)
 
 # Save model
 joblib.dump(model, "outputs/model/model.pkl")
